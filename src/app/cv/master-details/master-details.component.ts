@@ -16,17 +16,7 @@ export class MasterDetailsComponent {
   router = inject(Router);
   acr = inject(ActivatedRoute);
   constructor() {
-    this.cvService.getCvs().subscribe({
-      next: (cvs) => {
-        this.cvs = cvs;
-      },
-      error: () => {
-        this.cvs = this.cvService.getFakeCvs();
-        this.toastr.error(`
-          Attention!! Les données sont fictives, problème avec le serveur.
-          Veuillez contacter l'admin.`);
-      },
-    });
+    this.cvs = this.acr.snapshot.data["cvs"];
   }
 
   onForwardCv(cv: Cv) {
