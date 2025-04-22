@@ -49,6 +49,12 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
+import { CvService } from "./cv/services/cv.service";
+import { CONSTANTES } from "../config/const.config";
+import { FakeCvService } from "./cv/services/fake-cv.service";
+import { LoggerService } from "./services/logger.service";
+import { Logger2Service } from "./services/logger2.service";
+import { Logger3Service } from "./services/logger3.service";
 
 @NgModule({
   declarations: [
@@ -105,7 +111,29 @@ import { SliderComponent } from "./rxjs/slider/slider.component";
       registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    // Menu mta3na
+    {
+      provide: CvService,
+      useClass: CONSTANTES.env == "production" ? CvService : FakeCvService,
+    },
+    {
+      provide: LoggerService,
+      useClass: LoggerService,
+      multi: true,
+    },
+    {
+      provide: LoggerService,
+      useClass: Logger2Service,
+      multi: true,
+    },
+    {
+      provide: LoggerService,
+      useClass: Logger3Service,
+      multi: true,
+    },
+    AuthInterceptorProvider,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
