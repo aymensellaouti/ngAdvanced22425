@@ -55,7 +55,9 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LoggerService } from "./services/logger.service";
 import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
-
+import { WeekTodoComponent } from "./todo/week-todo/week-todo.component";
+import { UUID_TOKEN } from "./injection tokens/uuid.injectionToken";
+import { v4 as uuidV4 } from "uuid";
 @NgModule({
   declarations: [
     AppComponent,
@@ -95,6 +97,7 @@ import { Logger3Service } from "./services/logger3.service";
     RhComponent,
     UserListComponent,
     ProductsComponent,
+    WeekTodoComponent,
   ],
   imports: [
     BrowserModule,
@@ -131,6 +134,10 @@ import { Logger3Service } from "./services/logger3.service";
       provide: LoggerService,
       useClass: Logger3Service,
       multi: true,
+    },
+    {
+      provide: UUID_TOKEN,
+      useValue: uuidV4,
     },
     AuthInterceptorProvider,
   ],
