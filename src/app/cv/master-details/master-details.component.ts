@@ -17,11 +17,12 @@ export class MasterDetailsComponent {
   acr = inject(ActivatedRoute);
   constructor() {
     this.cvs = this.acr.snapshot.data["cvs"];
-  }
-
-  onForwardCv(cv: Cv) {
-    this.router.navigate([cv.id], {
-      relativeTo: this.acr,
+    this.cvService.selectCv$.subscribe({
+      next: (cv) => {
+        this.router.navigate([cv.id], {
+          relativeTo: this.acr,
+        });
+      },
     });
   }
 }

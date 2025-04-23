@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Cv } from "../model/cv";
-import { Observable } from "rxjs";
+import { Observable, Subject } from "rxjs";
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { API } from "../../../config/api.config";
 
@@ -16,6 +16,11 @@ export class CvService {
     ];
   }
 
+  private selectCvSubject$ = new Subject<Cv>();
+  /**
+   * Le flux des cvs sélectionnés
+   */
+  selectCv$ = this.selectCvSubject$.asObservable();
   /**
    *
    * Retourne un liste fictive de cvs
@@ -113,5 +118,13 @@ export class CvService {
     const search = `{"where":{"${property}":"${value}"}}`;
     const params = new HttpParams().set("filter", search);
     return this.http.get<Cv[]>(API.cv, { params });
+  }
+
+  /**
+   * Elle permet d'ajouter un cv au Flux des cvs sélectionnés
+   * @param cv : Cv le cv sélectionné
+   */
+  selectCv(cv: Cv) {
+    this.selectCvSubject$.next(cv);
   }
 }
