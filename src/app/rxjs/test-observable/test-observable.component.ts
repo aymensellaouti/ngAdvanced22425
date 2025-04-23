@@ -36,8 +36,12 @@ export class TestObservableComponent {
     // setTimeout(() => {
     this.firstObservable$
       // 5 4 3 2 1
-      .pipe(map((valeurTjini) => valeurTjini * 3))
-      // 15 12 9 6 3
+      .pipe(
+        map((valeurTjini) => valeurTjini * 3),
+        // 15 12 9 6 3
+        filter((valeur) => valeur % 2 == 0)
+        // 12 6
+      )
       .subscribe({
         next: (data) => {
           toaster.info("" + data);

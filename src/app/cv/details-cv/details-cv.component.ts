@@ -12,31 +12,29 @@ import { Observable } from "rxjs";
   templateUrl: "./details-cv.component.html",
   styleUrls: ["./details-cv.component.css"],
 })
-export class DetailsCvComponent implements OnInit {
-  cv$: Observable<Cv>;
+export class DetailsCvComponent {
+  cv: Cv | null = null;
+  //cv$: Observable<Cv>;
   constructor(
     private cvService: CvService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastrService,
     public authService: AuthService
-  ) {}
-
-  ngOnInit() {
-    // const id = this.activatedRoute.params.subscribe({
-    //   next: (params) => {
-    const id = this.activatedRoute.snapshot.params["id"];
-    this.cv$ = this.cvService.getCvById(+id);
-    // .subscribe({
-    //   next: (cv) => {
-    //     this.cv = cv;
-    //   },
-    //   error: (e) => {
-    //     this.router.navigate([APP_ROUTES.cv]);
-    //   },
-    // });
-    // },
-    // });
+  ) {
+    this.activatedRoute.params.subscribe({
+      next: (params) => {
+        const id = this.activatedRoute.snapshot.params["id"];
+        this.cvService.getCvById(+id).subscribe({
+          next: (cv) => {
+            this.cv = cv;
+          },
+          error: (e) => {
+            this.router.navigate([APP_ROUTES.cv]);
+          },
+        });
+      },
+    });
   }
   deleteCv(cv: Cv) {
     this.cvService.deleteCvById(cv.id).subscribe({
