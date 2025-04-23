@@ -79,6 +79,12 @@
           >RxJs</a
         >
         <a
+          class="nav-link"
+          [routerLink]="['slider']"
+          routerLinkActive="active text-primary"
+          >Slider</a
+        >
+        <a
           *ngIf="!authService.isAuthenticated()"
           class="nav-link"
           [routerLink]="['login']"

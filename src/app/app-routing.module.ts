@@ -16,12 +16,14 @@ import { MasterDetailsComponent } from "./cv/master-details/master-details.compo
 import { cvsResolver } from "./cv/resolvers/cvs.resolver";
 import { canLeaveGuard } from "./guards/can-leave.guard";
 import { TestObservableComponent } from "./rxjs/test-observable/test-observable.component";
+import { SliderComponent } from "./rxjs/slider/slider.component";
 
 ("cv/add");
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
   { path: "rh", component: RhComponent },
   { path: "rxjs", component: TestObservableComponent },
+  { path: "slider", component: SliderComponent },
   {
     path: "cv",
     component: CvComponent,
