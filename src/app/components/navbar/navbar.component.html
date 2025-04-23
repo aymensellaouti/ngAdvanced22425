@@ -73,6 +73,12 @@
           >Rh</a
         >
         <a
+          class="nav-link"
+          [routerLink]="['rxjs']"
+          routerLinkActive="active text-primary"
+          >RxJs</a
+        >
+        <a
           *ngIf="!authService.isAuthenticated()"
           class="nav-link"
           [routerLink]="['login']"

@@ -27,5 +27,15 @@ export class TestObservableComponent {
         console.log(data);
       },
     });
+    setTimeout(() => {
+      this.firstObservable$.subscribe({
+        next: (data) => {
+          toaster.info("" + data);
+        },
+        complete: () => {
+          toaster.error("BOOOOOM!!!!!!!!");
+        },
+      });
+    }, 3000);
   }
 }
