@@ -17,8 +17,10 @@ import { Settings } from "./dto/product-settings.dto";
   styleUrls: ["./products.component.css"],
 })
 export class ProductsComponent {
-  /* Todo : Faire le nécessaire pour créer le flux des produits à afficher */
-  /* Tips : vous pouvez voir les différents imports non utilisés et vous en inspirer */
+  // Todo : Faire le nécessaire pour créer le flux des produits à afficher */
+  // Todo Tips : vous pouvez voir les différents imports non utilisés et vous en inspirer */
   products$!: Observable<Product[]>;
   constructor() {}
+
+  more() {}
 }
