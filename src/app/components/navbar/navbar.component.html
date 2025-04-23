@@ -5,7 +5,7 @@
       [routerLink]="['']"
       [routerLinkActiveOptions]="{ exact: true }"
       routerLinkActive="active text-primary"
-      >cvStartingAdvProject</a
+      >ODDO BHF 2025 {{ (authService.user$ | async)?.email ?? "Annonyme" }}</a
     >
     <button
       class="navbar-toggler"
@@ -36,7 +36,7 @@
           >Cv</a
         >
         <a
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="authService.isLoggedIn$ | async"
           class="nav-link"
           [routerLink]="['cv/add']"
           routerLinkActive="active text-primary"
@@ -85,14 +85,14 @@
           >Slider</a
         >
         <a
-          *ngIf="!authService.isAuthenticated()"
+          *ngIf="authService.isLoggedOut$ | async"
           class="nav-link"
           [routerLink]="['login']"
           routerLinkActive="active text-primary"
           >Login</a
         >
         <a
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="authService.isLoggedIn$ | async"
           class="nav-link"
           (click)="logout()"
           >Logout</a
