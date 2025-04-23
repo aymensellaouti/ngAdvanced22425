@@ -9,11 +9,12 @@ import { ToastrService } from "ngx-toastr";
 })
 export class TestObservableComponent {
   firstObservable$: Observable<number>;
+  countDown = 5;
 
   constructor(private toaster: ToastrService) {
     // 5 4 3 2 1
     this.firstObservable$ = new Observable((observer) => {
-      let i = 5;
+      let i = this.countDown;
       setInterval(() => {
         if (!i) {
           observer.complete();
@@ -27,8 +28,17 @@ export class TestObservableComponent {
         console.log(data);
       },
     });
-    setTimeout(() => {
-      this.firstObservable$.subscribe({
+    // this.firstObservable$.subscribe({
+    //   next: (data) => {
+    //     this.countDown = data;
+    //   },
+    // });
+    // setTimeout(() => {
+    this.firstObservable$
+      // 5 4 3 2 1
+      .pipe(map((valeurTjini) => valeurTjini * 3))
+      // 15 12 9 6 3
+      .subscribe({
         next: (data) => {
           toaster.info("" + data);
         },
@@ -36,6 +46,6 @@ export class TestObservableComponent {
           toaster.error("BOOOOOM!!!!!!!!");
         },
       });
-    }, 3000);
+    // }, 3000);
   }
 }
