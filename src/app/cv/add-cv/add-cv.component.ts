@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormGroup,
   NgForm,
+  Validators,
 } from "@angular/forms";
 import { CvService } from "../services/cv.service";
 import { Router } from "@angular/router";
@@ -20,21 +21,24 @@ export class AddCvComponent {
   formBuilder = inject(FormBuilder);
   form: FormGroup = this.formBuilder.group(
     {
-      name: [""],
-      firstname: [""],
-      path: [""],
-      job: [""],
+      name: ["", Validators.required],
+      firstname: ["", Validators.required],
+      path: ["", Validators.required],
+      job: ["", Validators.required],
       cin: [
         "",
         {
-          validators: [],
+          validators: [Validators.required, Validators.pattern("[0-9]{8}")],
           asyncValidators: [],
         },
       ],
       age: [
         0,
         {
-          validators: [],
+          validators: [
+            Validators.required,
+            Validators.pattern("[0-1]?[0-9]{1,2}"),
+          ],
           updateOn: "blur",
         },
       ],
