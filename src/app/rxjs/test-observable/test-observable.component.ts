@@ -7,9 +7,10 @@ import { ToastrService } from "ngx-toastr";
   templateUrl: "./test-observable.component.html",
   styleUrls: ["./test-observable.component.css"],
 })
-export class TestObservableComponent {
+export class TestObservableComponent implements OnDestroy {
   firstObservable$: Observable<number>;
   countDown = 5;
+  subscription: Subscription = new Subscription();
 
   constructor(private toaster: ToastrService) {
     // 5 4 3 2 1
@@ -23,33 +24,40 @@ export class TestObservableComponent {
         }
       }, 1000);
     });
-    this.firstObservable$.subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-    });
+    this.subscription.add(
+      this.firstObservable$.subscribe({
+        next: (data) => {
+          console.log(data);
+        },
+      })
+    );
     // this.firstObservable$.subscribe({
     //   next: (data) => {
     //     this.countDown = data;
     //   },
     // });
     // setTimeout(() => {
-    this.firstObservable$
-      // 5 4 3 2 1
-      .pipe(
-        map((valeurTjini) => valeurTjini * 3),
-        // 15 12 9 6 3
-        filter((valeur) => valeur % 2 == 0)
-        // 12 6
-      )
-      .subscribe({
-        next: (data) => {
-          toaster.info("" + data);
-        },
-        complete: () => {
-          toaster.error("BOOOOOM!!!!!!!!");
-        },
-      });
+    this.subscription.add(
+      this.firstObservable$
+        // 5 4 3 2 1
+        .pipe(
+          map((valeurTjini) => valeurTjini * 3),
+          // 15 12 9 6 3
+          filter((valeur) => valeur % 2 == 0)
+          // 12 6
+        )
+        .subscribe({
+          next: (data) => {
+            toaster.info("" + data);
+          },
+          complete: () => {
+            toaster.error("BOOOOOM!!!!!!!!");
+          },
+        })
+    );
     // }, 3000);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
