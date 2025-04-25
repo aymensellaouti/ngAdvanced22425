@@ -22,7 +22,6 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { NgstyleComponent } from "./directives/ngstyle/ngstyle.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { NgclassComponent } from "./directives/ngclass/ngclass.component";
-import { TodoComponent } from "./todo/todo/todo.component";
 
 import { HighlightDirective } from "./directives/highlight.directive";
 import { RainbowDirective } from "./directives/rainbow.directive";
@@ -55,10 +54,10 @@ import { FakeCvService } from "./cv/services/fake-cv.service";
 import { LoggerService } from "./services/logger.service";
 import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
-import { WeekTodoComponent } from "./todo/week-todo/week-todo.component";
 import { UUID_TOKEN } from "./injection tokens/uuid.injectionToken";
 import { v4 as uuidV4 } from "uuid";
-import { MasterDetailsComponent } from './cv/master-details/master-details.component';
+import { MasterDetailsComponent } from "./cv/master-details/master-details.component";
+import { TodoModule } from "./todo/todo.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -85,7 +84,6 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     HighlightDirective,
     RainbowDirective,
     Btc2usdPipe,
-    TodoComponent,
     NavbarComponent,
     FrontComponent,
     AdminComponent,
@@ -98,7 +96,6 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     RhComponent,
     UserListComponent,
     ProductsComponent,
-    WeekTodoComponent,
     MasterDetailsComponent,
   ],
   imports: [
@@ -106,6 +103,7 @@ import { MasterDetailsComponent } from './cv/master-details/master-details.compo
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    TodoModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
