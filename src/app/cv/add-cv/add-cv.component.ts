@@ -12,6 +12,7 @@ import { ToastrService } from "ngx-toastr";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
 import { CONSTANTES } from "../../../config/const.config";
+import { uniqueCinValidator } from "../../validators/unique-cin.validator";
 
 @Component({
   selector: "app-add-cv",
@@ -21,6 +22,7 @@ import { CONSTANTES } from "../../../config/const.config";
 export class AddCvComponent implements OnDestroy {
   formBuilder = inject(FormBuilder);
   form: FormGroup = this.formBuilder.group(
+    // Form description
     {
       name: ["", Validators.required],
       firstname: ["", Validators.required],
@@ -30,7 +32,7 @@ export class AddCvComponent implements OnDestroy {
         "",
         {
           validators: [Validators.required, Validators.pattern("[0-9]{8}")],
-          asyncValidators: [],
+          asyncValidators: [uniqueCinValidator(this.cvService)],
         },
       ],
       age: [
@@ -44,6 +46,7 @@ export class AddCvComponent implements OnDestroy {
         },
       ],
     },
+    // Options du formulaire : Validators + updateOn
     {
       validators: [],
       asyncValidators: [],
