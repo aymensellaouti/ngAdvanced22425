@@ -46,7 +46,6 @@ import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
 import { UUID_TOKEN } from "./injection tokens/uuid.injectionToken";
 import { v4 as uuidV4 } from "uuid";
-import { CvModule } from "./cv/cv.module";
 @NgModule({
   declarations: [
     AppComponent,
@@ -81,7 +80,6 @@ import { CvModule } from "./cv/cv.module";
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
-    CvModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,

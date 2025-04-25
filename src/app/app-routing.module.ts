@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Route } from "@angular/router";
+import { RouterModule, Route, PreloadAllModules } from "@angular/router";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { ColorComponent } from "./components/color/color.component";
 import { FrontComponent } from "./templates/front/front.component";
@@ -10,6 +10,7 @@ import { RhComponent } from "./optimizationPattern/rh/rh.component";
 import { TestObservableComponent } from "./rxjs/test-observable/test-observable.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
 import { ProductsComponent } from "./products/products.component";
+import { CustomPreloadingStartegy } from "./preloading startegies/custom.preloading-strategy";
 
 const routes: Route[] = [
   { path: "login", component: LoginComponent },
@@ -28,6 +29,13 @@ const routes: Route[] = [
       import("./todo/todo.module").then((file) => file.TodoModule),
   },
   {
+    path: "cv",
+    data: {
+      preload: true,
+    },
+    loadChildren: () => import("./cv/cv.module").then((file) => file.CvModule),
+  },
+  {
     path: "admin",
     component: AdminComponent,
     children: [{ path: "color", component: ColorComponent }],
@@ -36,7 +44,11 @@ const routes: Route[] = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, {
+      preloadingStrategy: CustomPreloadingStartegy,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
