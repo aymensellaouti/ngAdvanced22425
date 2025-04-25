@@ -46,6 +46,8 @@ import { Logger2Service } from "./services/logger2.service";
 import { Logger3Service } from "./services/logger3.service";
 import { UUID_TOKEN } from "./injection tokens/uuid.injectionToken";
 import { v4 as uuidV4 } from "uuid";
+import { UserListDetailsComponent } from './optimizationPattern/user-list-details/user-list-details.component';
+import { FiboPipe } from './optimizationPattern/pipes/fibo.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -74,6 +76,8 @@ import { v4 as uuidV4 } from "uuid";
     RhComponent,
     UserListComponent,
     ProductsComponent,
+    UserListDetailsComponent,
+    FiboPipe,
   ],
   imports: [
     BrowserModule,

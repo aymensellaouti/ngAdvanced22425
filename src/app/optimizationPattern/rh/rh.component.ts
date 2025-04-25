@@ -21,8 +21,8 @@ export class RhComponent implements OnInit {
       this.createChart();
     });
   }
-  addUser(list: User[], newUser: string) {
-    this.userService.addUser(list, newUser);
+  addUser(list: User[], newUser: string): User[] {
+    return this.userService.addUser(list, newUser);
   }
   createChart() {
     const data = [
